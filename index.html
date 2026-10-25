@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasan Iqbal — Software Engineer</title>
+<meta name="description" content="Software engineer building AI systems, robotics, and full-stack products that ship. Portfolio of Hasan Iqbal.">
+<meta property="og:title" content="Hasan Iqbal — Software Engineer">
+<meta property="og:description" content="AI, robotics, and full-stack engineering. Selected work and experience.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230a0b0f'/%3E%3Ctext x='50' y='68' font-size='54' font-family='Georgia,serif' fill='%23b08d3e' text-anchor='middle'%3EHI%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="noise" aria-hidden="true"></div>
+
+<header class="site-header">
+  <nav class="nav container">
+    <a class="nav-mark" href="#top">HI</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-resume" href="resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="top" class="hero container">
+    <p class="eyebrow">Software Engineer · AI &amp; Robotics</p>
+    <h1 class="hero-name">Hasan Iqbal</h1>
+    <p class="hero-sub">I build systems that have to actually work &mdash; production LLM infrastructure at Cerebras, a humanoid robot that learns from physics simulation, and full&#8209;stack products with real users. Currently a Computer Science student at Seneca Polytechnic.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#work">See the work</a>
+      <a class="btn btn-ghost" href="mailto:hasaniqbal2@hotmail.com">Say hello</a>
+    </div>
+    <div class="hero-links">
+      <a href="https://github.com/redhasanh1" target="_blank" rel="noopener">GitHub</a>
+      <span class="dot">·</span>
+      <a href="https://linkedin.com/in/hasaniqbal2" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="dot">·</span>
+      <a href="mailto:hasaniqbal2@hotmail.com">hasaniqbal2@hotmail.com</a>
+    </div>
+  </section>
+
+  <section id="work" class="work container">
+    <h2 class="section-title"><span class="section-index">01</span> Selected work</h2>
+
+    <article class="project">
+      <div class="project-head">
+        <div>
+          <p class="project-eyebrow">Capstone · 2026</p>
+          <h3>PINN Humanoid</h3>
+        </div>
+        <div class="project-links">
+          <a href="https://pinn-humanoid.up.railway.app" target="_blank" rel="noopener">Live ↗</a>
+          <a href="https://github.com/redhasanh1/pinn-humanoid" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+      <p class="project-hook">A full-size, 3D-printed humanoid robot that learns to move from physics simulation instead of hand-coded motion &mdash; built from scratch as a final-year capstone.</p>
+      <p class="project-body">Most student robotics projects hand-code every motion. I wanted the robot to learn its own physics instead, so every skill starts as a blank neural network trained in simulation before it ever touches real motors. I implemented physics-informed neural networks (PINNs) that fold physics-based loss terms directly into training, which cut the amount of real data needed for sim-to-real transfer and made trajectory prediction and plan validation noticeably more reliable. On top of that I built a real-time ball-catching controller that predicts object trajectories from physics-aware motion models, and wired up ESP32 microcontrollers to drive finger-level control and teleoperation of the robot's 3D-printed hands, with an imitation-learning policy layered on top for autonomous task execution.</p>
+      <ul class="project-stack">
+        <li>Python</li><li>PyTorch</li><li>PINNs</li><li>ESP32 / C++</li><li>Imitation Learning</li><li>3D Printing</li>
+      </ul>
+    </article>
+
+    <article class="project">
+      <div class="project-head">
+        <div>
+          <p class="project-eyebrow">iOS App · 2025–2026</p>
+          <h3>ObjectRemoverAI</h3>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/redhasanh1/Neural-Video-Inpainting" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+      <p class="project-hook">A native iOS app that removes any object from a video, frame by frame, in real time &mdash; with a custom CUDA kernel I wrote to make it fast enough to be usable.</p>
+      <p class="project-body">Video object removal is normally too slow to feel like a product. I trained a custom YOLOv8 detector and integrated SAM2 for temporal mask tracking, then fed that into a ProPainter/RAFT inpainting pipeline so the background stays consistent frame to frame instead of flickering. The inference step was still the bottleneck, so I wrote a custom DCNv4 CUDA kernel as a TensorRT plugin targeting Ada Lovelace (SM 8.9), which cut inference latency 3x down to 7ms per frame versus the PyTorch baseline. To make it actually scale, I put the backend on a distributed worker cluster using Celery and Redis, load-tested across GPUs from an RTX 3060 up to an RTX 5090 on Salad.com, and shipped the client as a native Swift iOS app through full App Store review, account creation, and authentication.</p>
+      <ul class="project-stack">
+        <li>Swift / iOS</li><li>YOLOv8 / SAM2</li><li>CUDA / TensorRT</li><li>Celery / Redis</li><li>Distributed Systems</li>
+      </ul>
+    </article>
+
+    <article class="project">
+      <div class="project-head">
+        <div>
+          <p class="project-eyebrow">Full-Stack Platform · 2025</p>
+          <h3>RoomFinderAI</h3>
+        </div>
+        <div class="project-links">
+          <a href="https://roomfinderai.com" target="_blank" rel="noopener">Live ↗</a>
+          <a href="https://github.com/redhasanh1/RoomFinderAI" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+      <p class="project-hook">A rental marketplace with an AI agent that actually negotiates with landlords on your behalf, shipped as web, iOS, and Android apps.</p>
+      <p class="project-body">I built the full stack myself: a Node.js 18 / Express 5 backend with Supabase (Postgres, Auth, Storage, Realtime) as the data layer, Stripe for subscription billing, and Google OAuth for sign-in, alongside native companion apps in SwiftUI and Java/Android. The interesting engineering problem was keeping the AI negotiation engine online &mdash; it detects when it hits OpenAI rate limits and automatically fails over to Groq mid-conversation, so negotiations stay live through provider outages instead of silently dying. It's deployed on Railway behind a Cloudflare Worker for edge routing, with Cloudflare Turnstile handling bot protection in front of the negotiation endpoints.</p>
+      <ul class="project-stack">
+        <li>Node.js / Express</li><li>Supabase / Postgres</li><li>SwiftUI</li><li>Android / Java</li><li>Stripe</li><li>Cloudflare Workers</li>
+      </ul>
+    </article>
+
+    <article class="project">
+      <div class="project-head">
+        <div>
+          <p class="project-eyebrow">AI Product · 2025</p>
+          <h3>MarkRemoverAI</h3>
+        </div>
+        <div class="project-links">
+          <a href="https://markremoverai.com" target="_blank" rel="noopener">Live ↗</a>
+        </div>
+      </div>
+      <p class="project-hook">An AI watermark and object removal tool with a public API, used by people outside of me &mdash; the part I'm most proud of.</p>
+      <p class="project-body">Built on the same segmentation-and-inpainting approach as ObjectRemoverAI, repackaged as a web product and public API rather than a one-off demo. Shipping it as something other people could integrate meant treating documentation, error handling, and uptime as part of the product, not an afterthought.</p>
+      <ul class="project-stack">
+        <li>Computer Vision</li><li>Inpainting</li><li>Public API</li><li>Cloudflare / Railway</li>
+      </ul>
+    </article>
+
+  </section>
+
+  <section id="experience" class="experience container">
+    <h2 class="section-title"><span class="section-index">02</span> Experience</h2>
+
+    <div class="exp-row exp-featured">
+      <div class="exp-when">
+        <p class="exp-company">Cerebras Systems</p>
+        <p class="exp-dates">May 2026 — Aug 2026</p>
+        <p class="exp-loc">Sunnyvale, CA</p>
+      </div>
+      <div class="exp-what">
+        <p class="exp-title">Artificial Intelligence Engineer</p>
+        <ul>
+          <li>Led the end-to-end production bring-up of the Upstage Solar LLM in two weeks</li>
+          <li>Automated deployment pipelines for large-scale LLM serving and built monitoring tools for inference latency</li>
+          <li>Optimized wafer allocation for GPT-OSS model serving from 12 wafers down to 5, cutting infrastructure costs over 50% with no performance loss</li>
+          <li>Resolved distributed execution, networking, and model-serving issues across production GPU clusters</li>
+          <li>Developed EDSL, a custom CUDA-like language, including its core runtime and software stack</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-when">
+        <p class="exp-company">ACI Brands</p>
+        <p class="exp-dates">Apr 2023 — Aug 2023</p>
+        <p class="exp-loc">Oakville, ON</p>
+      </div>
+      <div class="exp-what">
+        <p class="exp-title">Database Administrator</p>
+        <p class="exp-desc">Designed database solutions with cross-functional teams, tuned query performance, and built monitoring for retail data accuracy and reporting.</p>
+      </div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-when">
+        <p class="exp-company">Canada Revenue Agency</p>
+        <p class="exp-dates">Sep 2022 — Dec 2022</p>
+        <p class="exp-loc">Toronto West, ON</p>
+      </div>
+      <div class="exp-what">
+        <p class="exp-title">Infrastructure Analyst</p>
+        <p class="exp-desc">Evaluated government systems and infrastructure for policy compliance and documented setup and operating procedures.</p>
+      </div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-when">
+        <p class="exp-company">Ripple</p>
+        <p class="exp-dates">Feb 2023 — Feb 2025</p>
+        <p class="exp-loc">Toronto, ON</p>
+      </div>
+      <div class="exp-what">
+        <p class="exp-title">XRPL Campus Ambassador</p>
+        <p class="exp-desc">Assessed blockchain security threats in untested code, and implemented Solidity smart contracts for decentralized applications.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about container">
+    <h2 class="section-title"><span class="section-index">03</span> About</h2>
+    <div class="about-grid">
+      <p class="about-text">I'm a generalist engineer &mdash; comfortable from embedded firmware up through distributed GPU infrastructure, and I like owning a problem completely rather than one layer of it. Most of what's above I built and shipped end to end: trained the models, wrote the backend, shipped the client, kept it running. I'm currently studying Computer Science at Seneca Polytechnic, after an Advanced Diploma in Computer Engineering Technology from Sheridan College.</p>
+      <div class="skills">
+        <div class="skill-group">
+          <p class="skill-label">Languages</p>
+          <p class="skill-items">Python, C++, C, CUDA, JavaScript/TypeScript, SQL, Bash</p>
+        </div>
+        <div class="skill-group">
+          <p class="skill-label">AI / ML</p>
+          <p class="skill-items">PyTorch, TensorRT, LLMs, Generative AI, Computer Vision, Model Training &amp; Fine-Tuning, Distributed Training, MLOps</p>
+        </div>
+        <div class="skill-group">
+          <p class="skill-label">Backend &amp; Infra</p>
+          <p class="skill-items">Node.js, Express, Flask, FastAPI, PostgreSQL, Docker, Kubernetes, AWS, GCP, Distributed Systems</p>
+        </div>
+        <div class="skill-group">
+          <p class="skill-label">Engineering</p>
+          <p class="skill-items">System Design, REST APIs, Microservices, Design Patterns, Unit Testing, Git, CI/CD</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact" class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-name">Hasan Iqbal</p>
+      <p class="footer-tag">Open to Winter 2027 software engineering co-ops.</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:hasaniqbal2@hotmail.com">hasaniqbal2@hotmail.com</a>
+      <a href="https://github.com/redhasanh1" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/hasaniqbal2" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Résumé</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

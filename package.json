@@ -1,0 +1,12 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hasan Iqbal's personal portfolio site.",
+  "scripts": {
+    "start": "serve -s . -l ${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "^14.2.3"
+  }
+}
